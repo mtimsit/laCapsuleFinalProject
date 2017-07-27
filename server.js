@@ -128,6 +128,27 @@ app.post("/getAllData", function (req, res) {
     });*/
 });
 
+app.get("/testData", function (req, res) {
+    console.log("initialPlaces : " + initialPlaces);
+    res.send(initialPlaces);
+
+    /*placeModel.find(function (err, placeList) {
+        var endValue;
+        if(err != undefined)
+        {
+            console.log("MongoDb Error : " + error);
+            endValue = "MongoDb Error : " + error;
+        }
+        else
+        {
+            //console.log("search done" + placeList);
+            endValue =placeList;
+        }
+
+        res.send(endValue);
+    });*/
+});
+
 app.post("/getFilterData", function (req, res) {
     placeModel.find({userId:req.session.userId}, function (err, placeList) {
         var endValue;

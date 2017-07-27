@@ -104,7 +104,7 @@ var initialPlaces = [
 
 //--------------------------------------- Routes ---------------------------------------//
 app.get("/", function (req, res) {
-    
+    res.write("Hello");
 });
 
 app.post("/getAllData", function (req, res) {

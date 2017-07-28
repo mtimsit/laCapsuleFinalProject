@@ -20,7 +20,7 @@ var placeSchema = mongoose.Schema({
     overview:{type: String,required: true},
     address: {street:String,city:String,zipCode:String,country:String},
     description:String,
-    isDisplay:Boolean,
+    hidden:Boolean,
     photoPath:String,
     pictoPath:String,
     timeRange:[{day:Number,fromHour:Number, fromMinute:Number, toHour:Number, toMinute:Number}],
@@ -149,6 +149,10 @@ app.get("/testData", function (req, res) {
     });*/
 });
 
+app.get("/putData", function (req, res) {
+
+});
+
 app.post("/getFilterData", function (req, res) {
     placeModel.find({userId:req.session.userId}, function (err, placeList) {
         var endValue;
@@ -242,7 +246,7 @@ var port = (process.env.PORT || 8080)
 app.listen(port, function () {
     var options = { server: { socketOptions: {connectTimeoutMS: 30000 } }};
 
-    mongoose.connect('mongodb://michael:michael@ds135912.mlab.com:35912/movieapp/',options, function(err) {
+    mongoose.connect('mongodb://michael:michael@ds123933.mlab.com:23933/finalproject',options, function(err) {
         if(err != undefined)
             console.log(err);
     });

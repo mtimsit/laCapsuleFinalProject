@@ -15,8 +15,8 @@ var util = require('util');
 var mongoose= require('mongoose');
 var placeSchema = mongoose.Schema({
     name:{type: String,required: true},
-    latitude:{type: Number,required: true},
-    longitude:{type: Number,required: true},
+    lat:{type: Number,required: true},
+    lng:{type: Number,required: true},
     overview:{type: String,required: true},
     address: {street:String,city:String,zipCode:String,country:String},
     description:String,
@@ -32,11 +32,11 @@ var placeModel = mongoose.model('place', placeSchema);
 //Valeurs initiales
 var initialPlaces = [
     {name:"Paris",
-    latitude:48.866667,
-    longitude:2.333333,
+    lat:48.866667,
+    lng:2.333333,
     overview:"C’est paris",
     address: {street:"Au centre de",city:"Paris",zipCode:"75001",country:"France"},
-    description:"C",
+    description:"",
     hidden:false,
     photoPath:"",
     pictoPath:"",
@@ -49,10 +49,10 @@ var initialPlaces = [
     type:[]},
 
     {name:"Tour Eiffel",
-    latitude:48.858069,
-    longitude:2.294385,
+    lat:48.858069,
+    lng:2.294385,
     overview:"La tour Eiffel",
-    address: {street:"Champ de Mars, 5 Avenue Anatole",city:"Paris",zipCode:"75007",country:""},
+    address: {street:"Champ de Mars, 5 Avenue Anatole",city:"Paris",zipCode:"75007",country:"France"},
     description:"",
     hidden:false,
     photoPath:"",
@@ -66,10 +66,10 @@ var initialPlaces = [
     type:[]},
 
     {name:"Beaubourg",
-    latitude:48.860649,
-    longitude:2.35219,
+    lat:48.860649,
+    lng:2.35219,
     overview:"",
-    address: {street:"",city:"",zipCode:"",country:""},
+    address: {street:"Place Georges-Pompidou",city:"Paris",zipCode:"75004",country:"France"},
     description:"",
     hidden:false,
     photoPath:"",
@@ -85,10 +85,10 @@ var initialPlaces = [
     type:[]},
 
     {name:"Wereso",
-    latitude:48.864792,
-    longitude:2.350152,
+    lat:48.864792,
+    lng:2.350152,
     overview:"",
-    address: {street:"",city:"",zipCode:"",country:""},
+    address: {street:"151 Rue St Denis",city:"Paris",zipCode:"75002",country:"France"},
     description:"",
     hidden:true,
     photoPath:"",
@@ -173,7 +173,7 @@ app.post("/createData", function (req, res) {
     var data = req.body;
     var endValue;
 
-    if(data.name != undefined && data.latitude != undefined && data.longitude != undefined && data.overview != undefined)
+    if(data.name != undefined && data.lat != undefined && data.lng != undefined && data.overview != undefined)
     {
         
         var address = {street:"",city:"",zipCode:"",country:""};
@@ -203,8 +203,8 @@ app.post("/createData", function (req, res) {
 
         var newPlace = new placeModel({
             name:data.name,
-            latitude:data.latitude,
-            longitude:data.longitude,
+            lat:data.lat,
+            lng:data.lng,
             overview:data.overview,
             address: address,
             description:description,

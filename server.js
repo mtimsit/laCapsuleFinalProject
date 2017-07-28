@@ -2,10 +2,11 @@
 var express = require('express');
 var app = express();
 
-app.use(function(req, res) {
+//Allow cross domain request
+/*app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-});
+});*/
 
 //npm install body-parser --save
 var bodyParser = require('body-parser');

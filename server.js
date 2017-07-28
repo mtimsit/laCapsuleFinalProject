@@ -9,6 +9,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+//npm install ejs --save
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+
 //npm install body-parser --save
 var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
@@ -75,7 +79,7 @@ var initialPlaces = [
     {name:"Beaubourg",
     lat:48.860649,
     lng:2.35219,
-    overview:"",
+    overview:"Voila beaubourg",
     address: {street:"Place Georges-Pompidou",city:"Paris",zipCode:"75004",country:"France"},
     description:"",
     hidden:false,
@@ -94,7 +98,7 @@ var initialPlaces = [
     {name:"Wereso",
     lat:48.864792,
     lng:2.350152,
-    overview:"",
+    overview:"wereso style, club 128, la coordonnerie, super pub a 3 euros la pinte trop grave bien",
     address: {street:"151 Rue St Denis",city:"Paris",zipCode:"75002",country:"France"},
     description:"",
     hidden:true,
@@ -156,8 +160,8 @@ app.get("/testData", function (req, res) {
     });*/
 });
 
-app.get("/putData", function (req, res) {
-
+app.get("/newData", function (req, res) {
+    res.render('newData');
 });
 
 app.post("/getFilterData", function (req, res) {
@@ -175,6 +179,8 @@ app.post("/getFilterData", function (req, res) {
         res.send(endValue);
     });
 });
+
+
 
 app.post("/createData", function (req, res) {
     var data = req.body;

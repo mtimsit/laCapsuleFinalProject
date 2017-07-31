@@ -1,0 +1,21 @@
+Pour chaque projet, une fois les sources récupérées…
+
+#Pour tester en local:
+1. Créer un nouveau
+2. Via le terminal, se positionner à la racine du répertoire projet et taper la commande: node server.js
+3. Via le navigateur, taper l’URL: http://localhost:8080/
+4. Affichage de la page d’accueil permettant de visualiser le contenu de la base MLab et d’ajouter des données
+
+
+#Pour déployer les sources sur Heroku
+1. Installer le cli d’Heroku s’il n’est pas déjà installer (sinon passer à l’étape 2): https://devcenter.heroku.com/articles/heroku-cli
+2. Via le terminal, se positionner à la racine du répertoire projet
+3. Taper la commande: heroku create
+4. Taper la commande: git remote -v
+   Résultats affichés dans la console:
+   heroku  https://git.heroku.com/NOM_DE_MON_PROJET_GENERE_PAR_HEROKU.git (fetch)
+   heroku  https://git.heroku.com/NOM_DE_MON_PROJET_GENERE_PAR_HEROKU.git (push)
+5. Taper la commande (remplacer avec votre nom de projet): heroku git:remote -a NOM_DE_MON_PROJET_GENERE_PAR_HEROKU
+6. Taper la commande: git push heroku master
+7. Via le navigateur, taper l’URL: https://NOM_DE_MON_PROJET_GENERE_PAR_HEROKU.herokuapp.com/
+8. Affichage de la page d’accueil permettant de visualiser le contenu de la base MLab et d’ajouter des données

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Weather App</title>
+  <script src="js/jquery.js"></script>
+</head>
+<body>
+
+<div>
+    <form action="/createData" method="post">
+    <div><strong>General: </strong></div>
+    <div >&nbsp;&nbsp;&nbsp;# Name* (String/Required) : <input type="text" name="name" style="width:300px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Latitude* (Number/Required) : <input type="number" name="lat" style="width:200px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Longitude* (Number/Required) : <input type="number" name="lng" style="width:200px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Overview* (String/Required) : <input type="text" name="overview" style="width:500px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Description (String) : <textarea type="text" name="description" style="width:500px;height:40px"></textarea></div>
+    <div>&nbsp;&nbsp;&nbsp;# Photo path (String) : <input type="text" name="photoPath" style="width:500px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Picto path (String) : <input type="text" name="pictoPath" style="width:500px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Hidden (Boolean) : <input type="checkbox" name="hidden" value="true" >   (Checked = Hidden / Unchecked = Visible)</div>
+    <br>
+    <div><strong>Address: </strong></div>
+    <div>&nbsp;&nbsp;&nbsp;# Street (String) : <input type="text" name="addressStreet" style="width:400px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# City (String) : <input type="text" name="addressCity" style="width:200px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Zipcode (String) : <input type="text" name="addressZipCode" style="width:100px;"></div>
+    <div>&nbsp;&nbsp;&nbsp;# Country (String) : <input type="text" name="addressCountry" style="width:200px;"></div>
+    <br>
+    <div class="input_service_wrap">
+        <div><strong>Services: </strong><button class="add_service_field_button">Add service</button></div>
+    </div>
+    <br>
+     <div class="input_type_wrap">
+        <div><strong>Types: </strong><button class="add_type_field_button">Add type</button></div>
+    </div>
+    <br>
+    <div><strong>Open hours: only usefull for the demo</strong></div>
+    <div>&nbsp;&nbsp;&nbsp;# Default hour (String) : <input type="text" name="defaultHour" style="width:200px;">   For the demo -> ex: 8h30 / 19h00</div>
+    <br>
+    <div class="input_time_wrap">
+        <div><strong>Open time range: </strong><button class="add_time_field_button">Add time range</button></div>
+        <!--div>&nbsp;&nbsp;&nbsp;# Day<select name="timeRange.day">
+                <option value="0">Monday</option>
+                <option value="1">Tuesday</option>
+                <option value="2">Wednesday</option>
+                <option value="3">Thursday</option>
+                <option value="4">Friday</option>
+                <option value="5">Saturday</option>
+                <option value="6">Sunday</option>
+            </select>
+            &nbsp;&nbsp;&nbsp; Open from hour (Number) : <input type="number" name="timeRange.fromHour" style="width:50px;">
+            &nbsp;&nbsp; minute (Number) : <input type="number" name="timeRange.fromMinute" style="width:50px;">
+            &nbsp;&nbsp;&nbsp;-> To hour (Number) : <input type="number" name="timeRange.toHour" style="width:50px;">
+            &nbsp;&nbsp; minute (Number) : <input type="number" name="timeRange.toMinute" style="width:50px;">
+        </div-->
+    </div>
+    <br><br>
+    <div><button type="submit" style="background-color:green;" class="submit_button">Save in Database</button></div>
+    </form>
+
+    <br><br>
+    <label>Mongo Db places:</label>
+    <table style="border-collapse: collapse;border: 1px solid black">
+   <tr style="border: 1px solid black">
+      <th style="border: 1px solid black">Name</th>
+      <th style="border: 1px solid black">Latitude</th>
+      <th style="border: 1px solid black">Lugitude</th>
+      <th style="border: 1px solid black">Overview</th>
+      <th style="border: 1px solid black">Description</th>
+      <th style="border: 1px solid black">Photo Path</th>
+      <th style="border: 1px solid black">Picto Path</th>
+      <th style="border: 1px solid black">Hidden</th>
+      <th style="border: 1px solid black">Address</th>
+      <th style="border: 1px solid black">Service</th>
+      <th style="border: 1px solid black">Type</th>
+      <th style="border: 1px solid black">Default time</th>
+      <th style="border: 1px solid black">Time range</th>
+   </tr>
+
+   <% for (var i = 0; i < places.length; i++) { %>
+    <tr style="border: 1px solid black">
+      <td style="border: 1px solid black;width:auto;"><%= places[i].name %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].lat %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].lng %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].overview %></td>
+      <td style="border: 1px solid black;width:10%;"><%= places[i].description %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].photoPath %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].pictoPath %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].hidden %></td>
+      <td style="border: 1px solid black;width:10%;"><%= places[i].address.street %> <%= places[i].address.city %> <%= places[i].address.zipCode %> <%= places[i].address.country %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].service %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].type %></td>
+      <td style="border: 1px solid black;width:auto;"><%= places[i].defaultHour %></td>
+      <td style="border: 1px solid black;width:25%;"><%= places[i].timeRange %></td>
+      
+    </tr>    
+   <% } %>
+</table>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var service_max_fields      = 100; //maximum input boxes allowe
+    var service_wrapper         = $(".input_service_wrap");
+    var add_service_button      = $(".add_service_field_button");
+
+    var type_max_fields      = 100; //maximum input boxes allowe
+    var type_wrapper         = $(".input_type_wrap");
+    var add_type_button      = $(".add_type_field_button");
+
+    var time_max_fields      = 100; //maximum input boxes allowe
+    var time_wrapper         = $(".input_time_wrap");
+    var add_time_button      = $(".add_time_field_button");
+    
+    var service_x = 0; //initlal text box count
+    $(add_service_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(service_x < service_max_fields){ //max input box allowed
+            console.log("service_x:" + service_x);
+            $(service_wrapper).append('<div>&nbsp;&nbsp;&nbsp;# Service (String) : <input type="text" name="service_' + service_x + '" style="width:200px;"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            service_x++; //text box increment
+        }
+    });
+    
+    $(service_wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); service_x--;
+    })
+
+    var type_x = 0; //initlal text box count
+    $(add_type_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(type_x < type_max_fields){ //max input box allowed
+            type_x++; //text box increment
+            $(type_wrapper).append('<div>&nbsp;&nbsp;&nbsp;# Type (String) : <input type="text" name="type_' + type_x + '" style="width:200px;"><a href="#" class="remove_field">Remove</a></div>'); //add input box
+        }
+    });
+    
+    $(type_wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); type_x--;
+    })
+
+    var time_x = 0; //initlal text box count
+    $(add_time_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(time_x < time_max_fields){ //max input box allowed
+            time_x++; //text box increment
+            $(time_wrapper).append('<div>&nbsp;&nbsp;&nbsp;# Day<select name="timeRangeDay_' + time_x + '"><option value="0">Monday</option><option value="1">Tuesday</option><option value="2">Wednesday</option><option value="3">Thursday</option><option value="4">Friday</option><option value="5">Saturday</option><option value="6">Sunday</option></select>&nbsp;&nbsp;&nbsp; Open from hour (Number) : <input type="number" name="timeRangeFromHour_' + time_x + '" style="width:50px;">&nbsp;&nbsp; minute (Number) : <input type="number" name="timeRangeFromMinute_' + time_x + '" style="width:50px;">&nbsp;&nbsp;&nbsp;-> To hour (Number) : <input type="number" name="timeRangeToHour_' + time_x + '" style="width:50px;">&nbsp;&nbsp; minute (Number) : <input type="number" name="timeRangeToMinute_' + time_x + '" style="width:50px;"><a href="#" class="remove_field">Remove</a></div>');
+        }
+    });
+    
+    $(time_wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); time_x--;
+    })
+});
+</script>
+
+</body>
+</html>
